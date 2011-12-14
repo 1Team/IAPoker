@@ -104,7 +104,7 @@
 		{
 			if (_value)
 			{
-				background.gotoAndStop("fold");
+				background.gotoAndStop("lost");
 			}
 		}
 

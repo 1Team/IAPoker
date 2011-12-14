@@ -1,4 +1,4 @@
-﻿package com.novabox.expertSystem 
+﻿package com.novabox.poker.expertSystem 
 {
 	/**
 	 * Expert System 

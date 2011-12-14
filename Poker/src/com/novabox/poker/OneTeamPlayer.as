@@ -20,7 +20,7 @@ package com.novabox.poker
 			}
 			else 
 			{
-				if (_pokerTable.GetValueToCall() < 5 && GetStackValue() >= _pokerTable.GetValueToCall())
+				if ((GetCard(0) && GetCard(0).GetHeight() > 8) || (GetCard(1) && GetCard(1).GetHeight() > 8) || (_pokerTable.GetValueToCall() < 5 && GetStackValue() >= _pokerTable.GetValueToCall()))
 				{
 					Call(_pokerTable.GetValueToCall());
 				}
