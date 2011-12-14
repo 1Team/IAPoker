@@ -45,8 +45,9 @@
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 						
-			var players:Array = [	new HumanPlayer("Human", PokerTable.PLAYER_INIT_STACK),
-									new OneTeamPlayer("player 12", PokerTable.PLAYER_INIT_STACK),
+			var players:Array = [	//new HumanPlayer("Human", PokerTable.PLAYER_INIT_STACK),
+									new OneTeamPlayer("1Team Player", PokerTable.PLAYER_INIT_STACK),
+									new PokerPlayer("player 6", PokerTable.PLAYER_INIT_STACK),
 									new PokerPlayer("player 7", PokerTable.PLAYER_INIT_STACK),
 									new PokerPlayer("player 8", PokerTable.PLAYER_INIT_STACK)
 								];
