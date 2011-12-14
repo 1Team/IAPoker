@@ -6,6 +6,7 @@
 	import com.novabox.playingCards.Suit;
 	import com.novabox.poker.evaluator.HandEvaluator;
 	import com.novabox.poker.HumanPlayer;
+	import com.novabox.poker.OneTeamPlayer;
 	import com.novabox.poker.PokerPlayer;
 	import com.novabox.poker.PokerTable;
 	import com.novabox.poker.states.Preflop;
@@ -45,7 +46,7 @@
 			// entry point
 						
 			var players:Array = [	new HumanPlayer("Human", PokerTable.PLAYER_INIT_STACK),
-									new PokerPlayer("player 6", PokerTable.PLAYER_INIT_STACK),
+									new OneTeamPlayer("player 12", PokerTable.PLAYER_INIT_STACK),
 									new PokerPlayer("player 7", PokerTable.PLAYER_INIT_STACK),
 									new PokerPlayer("player 8", PokerTable.PLAYER_INIT_STACK)
 								];
