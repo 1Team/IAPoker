@@ -11,6 +11,7 @@ package com.novabox.poker.expertSystem
 	public class OneTeamPlayer extends PokerPlayer
 	{
 		
+		private var pokerTable:PokerTable;
 		private var preFlop:Array = [	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
 										[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
 										[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
@@ -31,7 +32,9 @@ package com.novabox.poker.expertSystem
 		}
 		
 		override public function Play(_pokerTable:PokerTable) : Boolean
-		{	
+		{
+			pokerTable = _pokerTable;
+			
 			Perception();
 			Analyse();
 			Action();
@@ -54,9 +57,19 @@ package com.novabox.poker.expertSystem
 			return (lastAction != PokerAction.NONE);
 		}
 		
+		public function GetNumberCardsBoard():int
+		{
+			return pokerTable.GetBoard().length;
+		}
+		
 		public function Perception():void
 		{
-			
+			if (GetNumberCardsBoard() == 0) {
+				trace(this.GetCard(0).GetHeight());
+				trace(this.GetCard(1).GetHeight());
+				
+				trace(preFlop[GetCard(0).GetHeight()][this.GetCard(1).GetHeight()]);
+			}
 			
 			
 			
