@@ -14,6 +14,7 @@
 		public static function GetCardSetValue(_cardSet:Array) : int
 		{
 			
+			
 			var intArray:Array = new Array();
 			for (var i:int = 0; i < _cardSet.length; i++)
 			{
