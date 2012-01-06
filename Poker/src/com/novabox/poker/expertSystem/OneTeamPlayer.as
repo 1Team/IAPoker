@@ -10,8 +10,13 @@ package com.novabox.poker.expertSystem
 	 */
 	public class OneTeamPlayer extends PokerPlayer
 	{
-		
 		private var pokerTable:PokerTable;
+
+		private var check : int = 0;
+		private var call : int = 1 ;
+		private var raise : int = 2 ;
+		private var fold : int = 3 ;
+
 		private var preFlop:Array = [	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
 										[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
 										[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
@@ -80,8 +85,39 @@ package com.novabox.poker.expertSystem
 			
 		}
 		
-		public function Action():void
+		public function Action(i:int):void
 		{
+			if (i == check) {
+				//checker
+			}
+			else {
+				if (i == call) {
+					//suivre la mise
+				}else {
+					if(i == raise) {
+						//relancer
+					}else {
+						if (i == fold) {
+								//se coucher
+								
+								
+						}
+					}
+				}
+			}
+		}
+		
+		public function check() {
+			
+		}
+		
+		public function call() {
+			
+		}
+		public function raise() {
+			
+		}
+		public function fold() {
 			
 		}
 	}
