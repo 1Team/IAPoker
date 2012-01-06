@@ -18,6 +18,11 @@ package com.novabox.poker.expertSystem
 		
 		override public function Play(_pokerTable:PokerTable) : Boolean
 		{
+			
+			Perception();
+			Analyse();
+			Action();
+			
 			if (CanCheck(_pokerTable))
 			{
 				Check();
@@ -34,6 +39,21 @@ package com.novabox.poker.expertSystem
 				}
 			}
 			return (lastAction != PokerAction.NONE);
+		}
+		
+		public function Perception():void
+		{
+			
+		}
+		
+		public function Analyse():void
+		{
+			
+		}
+		
+		public function Action():void
+		{
+			
 		}
 	}
 
