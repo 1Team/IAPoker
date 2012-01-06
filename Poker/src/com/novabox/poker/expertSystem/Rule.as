@@ -1,4 +1,4 @@
-﻿package com.novabox.expertSystem 
+﻿package com.novabox.poker.expertSystem 
 {
 	import adobe.utils.ProductManager;
 	import flash.display.GradientType;

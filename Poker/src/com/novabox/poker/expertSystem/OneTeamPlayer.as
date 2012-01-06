@@ -1,5 +1,9 @@
 package com.novabox.poker.expertSystem 
 {
+	
+	import com.novabox.poker.PokerPlayer
+	import com.novabox.poker.PokerTable
+	import com.novabox.poker.PokerAction
 	/**
 	 * ...
 	 * @author Alex, Brian, Ikram, Maxime, Clément
