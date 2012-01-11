@@ -11,6 +11,19 @@ package com.novabox.poker.expertSystem
 	public class OneTeamPlayer extends PokerPlayer
 	{
 		private var pokerTable:PokerTable;
+		
+		private var expertSystem:ExpertSystem;
+		
+		public static const FactPeutChecker:Fact = new Fact("Peut Checker");
+		public static const FactMiseFaible:Fact = new Fact("Mise Faible");
+		public static const FactMiseMoyenne:Fact = new Fact("Mise Moyenne");
+		public static const FactMiseImportante:Fact = new Fact("Mise Importante");
+		public static const FactJeuNul:Fact = new Fact("Jeu Nul");
+		public static const FactJeuFaible:Fact = new Fact("Jeu Faible");
+		public static const FactJeuMoyen:Fact = new Fact("Jeu Moyen");
+		public static const FactJeuBon:Fact = new Fact("Jeu Bon");
+		public static const FactJeuTresBon:Fact = new Fact("Jeu Tres Bon");
+		public static const FactPeutRelancer:Fact = new Fact("Peut Relancer");
 
 		private var check : int = 0;
 		private var call : int = 1 ;
@@ -34,6 +47,48 @@ package com.novabox.poker.expertSystem
 		public function OneTeamPlayer(_name:String, _stackValue:Number) 
 		{
 			super(_name, _stackValue);
+			
+			expertSystem = new ExpertSystem();
+			
+			prepareRules();
+		}
+		
+		protected function prepareRules() : void
+		{
+			/* to do base régle
+			expertSystem.AddRule(new Rule(FactC, new Array(FactA, FactB)));
+			expertSystem.AddRule(new Rule(FactF, new Array(FactD, FactE)));
+			expertSystem.AddRule(new Rule(FactE, new Array(FactG)));*/
+		}
+		
+
+		
+		protected function lancerChainage() : void
+		{
+
+			//chainage avant
+			expertSystem.InferForward();
+			
+			var inferedFacts:Array = expertSystem.GetInferedFacts();
+			trace("Infered Facts:");
+			
+			for each(var inferedFact:Fact in inferedFacts)
+			{
+				trace(inferedFact.GetLabel());
+			}
+	
+			//reinit systeme
+			expertSystem.ResetFacts();
+			
+			//chainage arrière 
+			expertSystem.InferBackward();
+			var factsToAsk:Array = expertSystem.GetFactsToAsk();
+			trace("Facts to ask :");
+			for each(var factToAsk:Fact in factsToAsk)
+			{
+				trace(factToAsk.GetLabel());
+			}
+
 		}
 		
 		override public function Play(_pokerTable:PokerTable) : Boolean
