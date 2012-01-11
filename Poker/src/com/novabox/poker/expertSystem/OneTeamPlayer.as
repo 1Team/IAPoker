@@ -71,21 +71,17 @@ package com.novabox.poker.expertSystem
 			return preFlop[GetCard(0).GetHeight()][GetCard(1).GetHeight()];
 		}
 		
-		public function GetIndexNextPlayer() : PokerPlayer {
-			
-			return pokerTable.GetNextPlayerIndex(pokerTable.GetPlayerIndex(pokerTable.GetCurrentPlayer()));
-			
-		}
 		
 		
 		public function Perception():int
 		{
 			if (GetNumberCardsBoard() == 0) {
+				trace("Valeur main preflop : " + GetValuePreflop());
 				return GetValuePreflop();
 			}
 			else {
 				
-				
+				return 0;
 				
 			}
 			
@@ -117,20 +113,6 @@ package com.novabox.poker.expertSystem
 					}
 				}
 			}
-		}
-		
-		public function check() {
-			
-		}
-		
-		public function call() {
-			
-		}
-		public function raise() {
-			
-		}
-		public function fold() {
-			
 		}
 	}
 
