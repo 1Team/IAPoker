@@ -148,27 +148,27 @@ package com.novabox.poker.expertSystem
 			
 		}
 		
-		public function Action(i:int):void
+		public function Action(i:int, _pokerTable:PokerTable):void
 		{
 			if (i == check) {
-				//checker
+				Check();
 			}
 			else {
 				if (i == call) {
-					//suivre la mise
+					Call(_pokerTable.GetValueToCall());
 				}else {
 					if(i == raise) {
-						//relancer
+						Raise(_pokerTable.GetBigBlind(), _pokerTable.GetValueToCall());
 					}else {
 						if (i == fold) {
-								//se coucher
-								
-								
+								Fold();
+
 						}
 					}
 				}
 			}
 		}
+		
 	}
 
 }
