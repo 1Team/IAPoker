@@ -122,15 +122,27 @@ package com.novabox.poker.expertSystem
 			return pokerTable.GetBoard().length;
 		}
 		
-		public function Perception():void
+		public function GetValuePreflop() : int {
+			return preFlop[GetCard(0).GetHeight()][GetCard(1).GetHeight()];
+		}
+		
+		public function GetIndexNextPlayer() : PokerPlayer {
+			
+			return pokerTable.GetNextPlayerIndex(pokerTable.GetPlayerIndex(pokerTable.GetCurrentPlayer()));
+			
+		}
+		
+		
+		public function Perception():int
 		{
 			if (GetNumberCardsBoard() == 0) {
-				trace(this.GetCard(0).GetHeight());
-				trace(this.GetCard(1).GetHeight());
-				
-				trace(preFlop[GetCard(0).GetHeight()][this.GetCard(1).GetHeight()]);
+				return GetValuePreflop();
 			}
-			
+			else {
+				
+				
+				
+			}
 			
 			
 		}
