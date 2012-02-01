@@ -190,8 +190,7 @@ package com.novabox.poker.expertSystem
 			
 			Perception();
 			Analyse();
-			Action();
-			Action();
+			//Action();
 
 			
 			if (CanCheck(_pokerTable))
@@ -219,10 +218,6 @@ package com.novabox.poker.expertSystem
 		
 		public function GetValuePreflop() : int {
 			return preFlop[GetCard(0).GetHeight()][GetCard(1).GetHeight()];
-		}
-		
-		public function GetIndexNextPlayer() : int {
-			
 		}
 		
 		public function probabiliteGain() : Number {
@@ -280,8 +275,7 @@ package com.novabox.poker.expertSystem
 			probabilite = gagne / 1000;
 			return probabilite;
 				
-			}			
-		}
+		}			
 		
 		public function Perception():void
 		{
@@ -292,8 +286,6 @@ package com.novabox.poker.expertSystem
 				trace("Probabilité de gagné : " + probabiliteGain());
 				
 			}
-			return 0;
-			
 		}
 		
 		public function Analyse():void
@@ -322,5 +314,4 @@ package com.novabox.poker.expertSystem
 		}
 		
 	}
-
 }
