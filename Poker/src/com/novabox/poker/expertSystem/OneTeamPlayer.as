@@ -188,13 +188,11 @@ package com.novabox.poker.expertSystem
 		{
 			pokerTable = _pokerTable;
 			
-			/*Perception();
+			Perception();
 			Analyse();
-<<<<<<< HEAD
-			//Action();
-=======
-			Action();*/
->>>>>>> 01b38fe5b03a6f6c1c25305baac629afd8a4fb90
+			Action();
+			Action();
+
 			
 			if (CanCheck(_pokerTable))
 			{
@@ -278,14 +276,11 @@ package com.novabox.poker.expertSystem
 					if (score1 < score2 && score1 != 0)
 						gagne++;
 				}
-<<<<<<< HEAD
 			}
 			probabilite = gagne / 1000;
 			return probabilite;
-=======
 				
 			}			
->>>>>>> 01b38fe5b03a6f6c1c25305baac629afd8a4fb90
 		}
 		
 		public function Perception():void
