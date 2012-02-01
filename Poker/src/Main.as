@@ -23,7 +23,7 @@
 	[SWF(backgroundColor = "#669933", frameRate = "60", width = "1024", height = "768")]
 	public class Main extends Sprite 
 	{
-		public static const UPDATE_DELAY:int = 500;
+		public static const UPDATE_DELAY:int = 1500;
 		protected var updateTime:int;
 		
 		protected var pokerTable:PokerTable;

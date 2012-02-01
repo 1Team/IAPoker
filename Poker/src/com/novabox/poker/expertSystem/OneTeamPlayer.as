@@ -156,9 +156,9 @@ package com.novabox.poker.expertSystem
 		
 
 		
-		protected function lancerChainage() : void
+		protected function lancerChainage() : Fact
 		{
-			expertSystem.ResetFacts();
+			
 			//chainage avant
 			expertSystem.InferForward();
 			
@@ -169,7 +169,8 @@ package com.novabox.poker.expertSystem
 			{
 				trace(inferedFact.GetLabel());
 			}
-	
+			
+			return inferedFacts.pop() as Fact;
 			//reinit systeme
 			
 			
@@ -189,11 +190,11 @@ package com.novabox.poker.expertSystem
 			pokerTable = _pokerTable;
 			
 			Perception();
-			Analyse();
-			//Action();
+			var action:int = Analyse();
+			Action(action);
 
 			
-			if (CanCheck(_pokerTable))
+			/*if (CanCheck(_pokerTable))
 			{
 				Check();
 			}
@@ -207,7 +208,7 @@ package com.novabox.poker.expertSystem
 				{
 					Fold();
 				}
-			}
+			}*/
 			return (lastAction != PokerAction.NONE);
 		}
 		
@@ -279,18 +280,66 @@ package com.novabox.poker.expertSystem
 		
 		public function Perception():void
 		{
-			if (GetNumberCardsBoard() == 0) {
+			expertSystem.ResetFacts();
+			var numberCard:int = GetNumberCardsBoard();
+			if (numberCard == 0) {
 				trace("Valeur main preflop : " + GetValuePreflop());
+				var valeurPreflop:int = GetValuePreflop();
+				if (valeurPreflop == 0)
+					expertSystem.SetFactValue(FactJeuFaible, true);
+				else if (valeurPreflop == 1)
+					expertSystem.SetFactValue(FactJeuMoyen, true);
+				else if (valeurPreflop == 2)
+					expertSystem.SetFactValue(FactJeuBon, true);
+				else if (valeurPreflop == 3)
+					expertSystem.SetFactValue(FactJeuTresBon, true);
+					
+				expertSystem.SetFactValue(FactPreFlop, true);
 			}
 			else {
 				trace("Probabilité de gagné : " + probabiliteGain());
+				var probabilite:Number = probabiliteGain();
+				if (probabilite < 0.2)
+					expertSystem.SetFactValue(FactJeuNul, true);
+				else if (probabilite < 0.4)
+					expertSystem.SetFactValue(FactJeuFaible, true);
+				else if (probabilite < 0.6)
+					expertSystem.SetFactValue(FactJeuMoyen, true);
+				else if (probabilite < 0.8)
+					expertSystem.SetFactValue(FactJeuBon, true);
+				else if (probabilite <= 1)
+					expertSystem.SetFactValue(FactJeuTresBon, true);
 				
+				if (numberCard == 3)
+					expertSystem.SetFactValue(FactFlop, true);
+				else if (numberCard == 4)
+					expertSystem.SetFactValue(FactTurn, true);
+				else if (numberCard == 5)
+					expertSystem.SetFactValue(FactRiver, true);
 			}
+			
+			if (CanCheck(pokerTable))
+				expertSystem.SetFactValue(FactPeutChecker, true);
+			else if (pokerTable.GetValueToCall() < 10)
+				expertSystem.SetFactValue(FactMiseFaible, true);
+			else if (pokerTable.GetValueToCall() < 50)
+				expertSystem.SetFactValue(FactMiseMoyenne, true);
+			else 
+				expertSystem.SetFactValue(FactMiseImportante, true);
 		}
 		
-		public function Analyse():void
+		public function Analyse():int
 		{
-			
+			var fait:Fact = lancerChainage();
+			if (fait.GetLabel() == "Se Coucher")
+				return fold;
+			if (fait.GetLabel() == "Checker")
+				return check;
+			if (fait.GetLabel() == "Suivre")
+				return call;
+			if (fait.GetLabel() == "Relancer")
+				return raise;
+			return fold;
 		}
 		
 		public function Action(i:int):void
