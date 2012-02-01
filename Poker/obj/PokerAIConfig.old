@@ -16,7 +16,11 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
+<<<<<<< HEAD
       <value>'14/01/2012'</value>
+=======
+      <value>'11/01/2012'</value>
+>>>>>>> 48c5c84e02cd8ce907b6b5264dc4657da7146605
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
