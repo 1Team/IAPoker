@@ -190,17 +190,17 @@ package com.novabox.poker.expertSystem
 			
 		}
 		
-		public function Action(i:int, _pokerTable:PokerTable):void
+		public function Action(i:int):void
 		{
 			if (i == check) {
 				Check();
 			}
 			else {
 				if (i == call) {
-					Call(_pokerTable.GetValueToCall());
+					Call(pokerTable.GetValueToCall());
 				}else {
 					if(i == raise) {
-						Raise(_pokerTable.GetBigBlind(), _pokerTable.GetValueToCall());
+						Raise(pokerTable.GetBigBlind(), pokerTable.GetValueToCall());
 					}else {
 						if (i == fold) {
 								Fold();
