@@ -282,21 +282,21 @@ package com.novabox.poker.expertSystem
 		
 		public function Action(i:int):void
 		{
-			if (i == check) {
+			if (i == check)
+			{
 				Check();
 			}
-			else {
-				if (i == call) {
-					Call(pokerTable.GetValueToCall());
-				}else {
-					if(i == raise) {
-						Raise(pokerTable.GetBigBlind(), pokerTable.GetValueToCall());
-					}else {
-						if (i == fold) {
-								Fold();
-						}
-					}
-				}
+			else if (i == call) 
+			{
+				Call(pokerTable.GetValueToCall());
+			}
+			else if (i == raise)
+			{
+				Raise(pokerTable.GetBigBlind(), pokerTable.GetValueToCall());
+			}
+			else if (i == fold) 
+			{
+				Fold();
 			}
 		}
 		
