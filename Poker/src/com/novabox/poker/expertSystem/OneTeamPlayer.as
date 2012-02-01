@@ -1,6 +1,10 @@
 package com.novabox.poker.expertSystem 
 {
 	
+	import com.novabox.playingCards.Deck;
+	import com.novabox.playingCards.Height;
+	import com.novabox.playingCards.PlayingCard;
+	import com.novabox.playingCards.Suit;
 	import com.novabox.poker.PokerPlayer
 	import com.novabox.poker.PokerTable
 	import com.novabox.poker.PokerAction
@@ -126,17 +130,55 @@ package com.novabox.poker.expertSystem
 			return preFlop[GetCard(0).GetHeight()][GetCard(1).GetHeight()];
 		}
 		
+		public function probabiliteGain() : Number {
+			
+			var probabilite : Number = 0.0;
+			var card1:PlayingCard;
+			var card2:PlayingCard;
+			var board:Array;
+			var deck : Deck;
+			var i:int;
+			
+			
+			for (i = 0; i < 1000; i++) {
+				
+				deck = new Deck();
+				board = new Array();
+				
+				deck.RemoveCard(GetCard(0));
+				deck.RemoveCard(GetCard(1));
+				
+				for (i = 0; i < GetNumberCardsBoard(); i++ ) {
+					board.push(pokerTable.GetBoard()[i]);
+					deck.RemoveCard(board[i]);
+				}	
+				
+				deck.Shuffle();
+				
+				card1 = deck.GetTopCard();
+				card2 = deck.GetTopCard();
+				
+				for (i = 0; i < 5 - GetNumberCardsBoard(); i++) {
+					board.push(deck.GetTopCard());
+				}
+				
+			}
+			
+			
+		}
 		
-		
-		public function Perception():int
+		public function Perception():void
 		{
 			if (GetNumberCardsBoard() == 0) {
 				trace("Valeur main preflop : " + GetValuePreflop());
-				return GetValuePreflop();
+				
 			}
 			else {
 				
-				return 0;
+				
+				
+				
+				
 				
 			}
 			
@@ -162,7 +204,6 @@ package com.novabox.poker.expertSystem
 					}else {
 						if (i == fold) {
 								Fold();
-
 						}
 					}
 				}
