@@ -8,6 +8,7 @@ package com.novabox.poker.expertSystem
 	import com.novabox.poker.PokerPlayer
 	import com.novabox.poker.PokerTable
 	import com.novabox.poker.PokerAction
+	import com.novabox.poker.PokerTools;
 	/**
 	 * ...
 	 * @author Alex, Brian, Ikram, Maxime, Clément
@@ -101,7 +102,7 @@ package com.novabox.poker.expertSystem
 			
 			Perception();
 			Analyse();
-			Action();
+			//Action();
 			
 			if (CanCheck(_pokerTable))
 			{
@@ -133,52 +134,66 @@ package com.novabox.poker.expertSystem
 		public function probabiliteGain() : Number {
 			
 			var probabilite : Number = 0.0;
-			var card1:PlayingCard;
-			var card2:PlayingCard;
-			var board:Array;
-			var deck : Deck;
-			var i:int;
+			var board:Array, main1:Array, main2:Array;
+			var deck:Deck = new Deck();
+			var i:int, score1:int, score2:int, cardIndex1:int, cardIndex2:int;
+			var gagne:int = 0;
 			
+			deck.RemoveCard(GetCard(0));
+			deck.RemoveCard(GetCard(1));
+			
+			main1 = new Array();
+			main2 = new Array();
+			main1[0] = GetCard(0);
+			main1[1] = GetCard(1);
+			
+			
+				
+			for (i = 0; i < GetNumberCardsBoard(); i++ ) {
+				main1[i+2] = pokerTable.GetBoard()[i];
+				main2[i+2] = pokerTable.GetBoard()[i];
+				deck.RemoveCard(pokerTable.GetBoard()[i]);
+			}
+			
+			deck.Shuffle();
 			
 			for (i = 0; i < 1000; i++) {
 				
-				deck = new Deck();
-				board = new Array();
+				cardIndex1 = Math.random() * (52 - 2 - GetNumberCardsBoard());
+				cardIndex2 = Math.random() * (52 - 2 - GetNumberCardsBoard());
 				
-				deck.RemoveCard(GetCard(0));
-				deck.RemoveCard(GetCard(1));
-				
-				for (i = 0; i < GetNumberCardsBoard(); i++ ) {
-					board.push(pokerTable.GetBoard()[i]);
-					deck.RemoveCard(board[i]);
-				}	
-				
-				deck.Shuffle();
-				
-				card1 = deck.GetTopCard();
-				card2 = deck.GetTopCard();
-				
-				for (i = 0; i < 5 - GetNumberCardsBoard(); i++) {
-					board.push(deck.GetTopCard());
+				if (cardIndex1 != cardIndex2) {
+					main2[0] = deck.GetCard(cardIndex1);
+					main2[1] = deck.GetCard(cardIndex2);
+					
+					if (GetNumberCardsBoard() == 4) {
+						var river:int = Math.random() * (52 - 2 - GetNumberCardsBoard());
+						if (river != cardIndex1 && river != cardIndex2) {
+							main1[6] = deck.GetCard(river);
+							main2[6] = deck.GetCard(river);
+						}
+					}
+					
+					if ((main1.length == 5 || main1.length == 7) && (main2.length == 5 || main2.length == 7)) {
+						score1 = PokerTools.GetCardSetValue(main1);
+						score2 = PokerTools.GetCardSetValue(main2);
+					}
+					
+					if (score1 < score2 && score1 != 0)
+						gagne++;
 				}
-				
 			}
-			
-			
+			probabilite = gagne / 1000;
+			return probabilite;
 		}
 		
 		public function Perception():void
 		{
 			if (GetNumberCardsBoard() == 0) {
 				trace("Valeur main preflop : " + GetValuePreflop());
-				
 			}
 			else {
-				
-				
-				
-				
-				
+				trace("Probabilité de gagné : " + probabiliteGain());
 				
 			}
 			
