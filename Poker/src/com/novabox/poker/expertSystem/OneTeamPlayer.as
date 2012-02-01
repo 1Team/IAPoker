@@ -14,6 +14,10 @@ package com.novabox.poker.expertSystem
 		
 		private var expertSystem:ExpertSystem;
 		
+		public static const FactPreFlop:Fact = new Fact("PreFlop");
+		public static const FactFlop:Fact = new Fact("Flop");
+		public static const FactTurn:Fact = new Fact("Turn");
+		public static const FactRiver:Fact = new Fact("River");
 		public static const FactPeutChecker:Fact = new Fact("Peut Checker");
 		public static const FactMiseFaible:Fact = new Fact("Mise Faible");
 		public static const FactMiseMoyenne:Fact = new Fact("Mise Moyenne");
@@ -24,6 +28,10 @@ package com.novabox.poker.expertSystem
 		public static const FactJeuBon:Fact = new Fact("Jeu Bon");
 		public static const FactJeuTresBon:Fact = new Fact("Jeu Tres Bon");
 		public static const FactPeutRelancer:Fact = new Fact("Peut Relancer");
+		public static const FactRelancer:Fact = new Fact("Relancer");
+		public static const FactSuivre:Fact = new Fact("Suivre");
+		public static const FactSeCoucher:Fact = new Fact("Se Coucher");
+		public static const FactChecker:Fact = new Fact("Checker");
 
 		private var check : int = 0;
 		private var call : int = 1 ;
@@ -55,10 +63,90 @@ package com.novabox.poker.expertSystem
 		
 		protected function prepareRules() : void
 		{
-			/* to do base régle
-			expertSystem.AddRule(new Rule(FactC, new Array(FactA, FactB)));
-			expertSystem.AddRule(new Rule(FactF, new Array(FactD, FactE)));
-			expertSystem.AddRule(new Rule(FactE, new Array(FactG)));*/
+			//PreFlop rules
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactPreFlop, FactJeuTresBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuTresBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuTresBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuTresBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactPreFlop, FactJeuBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuMoyen, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactPreFlop, FactJeuMoyen, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactPreFlop, FactJeuMoyen, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactPreFlop, FactJeuMoyen, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuFaible, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuFaible, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactPreFlop, FactJeuFaible, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactPreFlop, FactJeuFaible, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuNul, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuNul, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactPreFlop, FactJeuNul, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactPreFlop, FactJeuNul, FactPeutChecker)));
+			//Flop rules
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactFlop, FactJeuTresBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactFlop, FactJeuTresBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactFlop, FactJeuTresBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactFlop, FactJeuTresBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactFlop, FactJeuBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactFlop, FactJeuBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactFlop, FactJeuBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactFlop, FactJeuBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuMoyen, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactFlop, FactJeuMoyen, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactFlop, FactJeuMoyen, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactFlop, FactJeuMoyen, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuFaible, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuFaible, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuFaible, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactFlop, FactJeuFaible, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuNul, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuNul, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactFlop, FactJeuNul, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactFlop, FactJeuNul, FactPeutChecker)));
+			//turn rules
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuTresBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuTresBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuTresBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactTurn, FactJeuTresBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactTurn, FactJeuBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuMoyen, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuMoyen, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactTurn, FactJeuMoyen, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactTurn, FactJeuMoyen, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuFaible, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuFaible, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuFaible, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactTurn, FactJeuFaible, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuNul, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuNul, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactTurn, FactJeuNul, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactTurn, FactJeuNul, FactPeutChecker)));
+			//River rules
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactRiver, FactJeuTresBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactRiver, FactJeuTresBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactRiver, FactJeuTresBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactRiver, FactJeuTresBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactRiver, FactJeuBon, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactRiver, FactJeuBon, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactRiver, FactJeuBon, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactRelancer , new Array(FactRiver, FactJeuBon, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuMoyen, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuMoyen, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSuivre , new Array(FactRiver, FactJeuMoyen, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactRiver, FactJeuMoyen, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuFaible, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuFaible, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuFaible, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactRiver, FactJeuFaible, FactPeutChecker)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuNul, FactMiseImportante)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuNul, FactMiseMoyenne)));
+			expertSystem.AddRule(new Rule(FactSeCoucher , new Array(FactRiver, FactJeuNul, FactMiseFaible)));
+			expertSystem.AddRule(new Rule(FactChecker , new Array(FactRiver, FactJeuNul, FactPeutChecker)));
 		}
 		
 
@@ -95,9 +183,9 @@ package com.novabox.poker.expertSystem
 		{
 			pokerTable = _pokerTable;
 			
-			Perception();
+			/*Perception();
 			Analyse();
-			Action();
+			Action();*/
 			
 			if (CanCheck(_pokerTable))
 			{
@@ -126,7 +214,7 @@ package com.novabox.poker.expertSystem
 			return preFlop[GetCard(0).GetHeight()][GetCard(1).GetHeight()];
 		}
 		
-		public function GetIndexNextPlayer() : PokerPlayer {
+		public function GetIndexNextPlayer() : int {
 			
 			return pokerTable.GetNextPlayerIndex(pokerTable.GetPlayerIndex(pokerTable.GetCurrentPlayer()));
 			
@@ -143,7 +231,7 @@ package com.novabox.poker.expertSystem
 				
 				
 			}
-			
+			return 0;
 			
 		}
 		
