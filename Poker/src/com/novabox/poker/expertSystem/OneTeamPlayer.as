@@ -153,7 +153,7 @@ package com.novabox.poker.expertSystem
 		
 		protected function lancerChainage() : void
 		{
-
+			expertSystem.ResetFacts();
 			//chainage avant
 			expertSystem.InferForward();
 			
@@ -166,16 +166,16 @@ package com.novabox.poker.expertSystem
 			}
 	
 			//reinit systeme
-			expertSystem.ResetFacts();
+			
 			
 			//chainage arrière 
-			expertSystem.InferBackward();
+			/*expertSystem.InferBackward();
 			var factsToAsk:Array = expertSystem.GetFactsToAsk();
 			trace("Facts to ask :");
 			for each(var factToAsk:Fact in factsToAsk)
 			{
 				trace(factToAsk.GetLabel());
-			}
+			}*/
 
 		}
 		
