@@ -23,7 +23,7 @@
 	[SWF(backgroundColor = "#669933", frameRate = "60", width = "1024", height = "768")]
 	public class Main extends Sprite 
 	{
-		public static const UPDATE_DELAY:int = 1500;
+		public static const UPDATE_DELAY:int = 1000;
 		protected var updateTime:int;
 		
 		protected var pokerTable:PokerTable;
@@ -47,9 +47,9 @@
 						
 			var players:Array = [	//new HumanPlayer("Human", PokerTable.PLAYER_INIT_STACK),
 									new OneTeamPlayer("1Team Player", PokerTable.PLAYER_INIT_STACK),
-									new PokerPlayer("player 6", PokerTable.PLAYER_INIT_STACK),
-									new PokerPlayer("player 7", PokerTable.PLAYER_INIT_STACK),
-									new PokerPlayer("player 8", PokerTable.PLAYER_INIT_STACK)
+									new OneTeamPlayer("Human", PokerTable.PLAYER_INIT_STACK),
+									new OneTeamPlayer("1Team Player 2", PokerTable.PLAYER_INIT_STACK),
+									new OneTeamPlayer("1Team Player 3", PokerTable.PLAYER_INIT_STACK)
 								];
 									
 			pokerTable = new PokerTable(players);

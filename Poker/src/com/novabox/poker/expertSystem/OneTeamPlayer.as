@@ -299,13 +299,13 @@ package com.novabox.poker.expertSystem
 			else {
 				trace("Probabilité de gagné : " + probabiliteGain());
 				var probabilite:Number = probabiliteGain();
-				if (probabilite < 0.2)
+				if (probabilite < 0.15)
 					expertSystem.SetFactValue(FactJeuNul, true);
-				else if (probabilite < 0.4)
+				else if (probabilite < 0.2)
 					expertSystem.SetFactValue(FactJeuFaible, true);
-				else if (probabilite < 0.6)
+				else if (probabilite < 0.3)
 					expertSystem.SetFactValue(FactJeuMoyen, true);
-				else if (probabilite < 0.8)
+				else if (probabilite < 0.5)
 					expertSystem.SetFactValue(FactJeuBon, true);
 				else if (probabilite <= 1)
 					expertSystem.SetFactValue(FactJeuTresBon, true);
@@ -320,9 +320,9 @@ package com.novabox.poker.expertSystem
 			
 			if (CanCheck(pokerTable))
 				expertSystem.SetFactValue(FactPeutChecker, true);
-			else if (pokerTable.GetValueToCall() < 10)
+			else if (pokerTable.GetValueToCall() < (this.GetStackValue() / 10))
 				expertSystem.SetFactValue(FactMiseFaible, true);
-			else if (pokerTable.GetValueToCall() < 50)
+			else if (pokerTable.GetValueToCall() < (this.GetStackValue() / 6))
 				expertSystem.SetFactValue(FactMiseMoyenne, true);
 			else 
 				expertSystem.SetFactValue(FactMiseImportante, true);
@@ -354,12 +354,27 @@ package com.novabox.poker.expertSystem
 			}
 			else if (i == raise)
 			{
-				Raise(pokerTable.GetBigBlind(), pokerTable.GetValueToCall());
+				Raise(ValeurRelance(), pokerTable.GetValueToCall());
 			}
 			else if (i == fold) 
 			{
 				Fold();
 			}
+		}
+		
+		public function ValeurRelance():int
+		{
+			if (expertSystem.GetFactBase().GetFactValue(FactJeuNul))
+				return pokerTable.GetBigBlind();
+			if (expertSystem.GetFactBase().GetFactValue(FactJeuFaible))
+				return (pokerTable.GetBigBlind() *2 );
+			if (expertSystem.GetFactBase().GetFactValue(FactJeuMoyen))
+				return (pokerTable.GetBigBlind() *3 );
+			if (expertSystem.GetFactBase().GetFactValue(FactJeuBon))
+				return (pokerTable.GetBigBlind() *4 );
+			if (expertSystem.GetFactBase().GetFactValue(FactJeuTresBon))
+				return (pokerTable.GetBigBlind() * 6 );
+			return (pokerTable.GetBigBlind() * 2 );
 		}
 		
 	}
