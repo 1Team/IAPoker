@@ -133,14 +133,14 @@
 		{
 			Bet(_value + (_callValue - betValue));
 			lastAction = PokerAction.RAISE;
-			TraceAction("Raise " + _value + "(Call value : " +_callValue + ")");
+			TraceAction("Raise (Relancer)" + _value + "(Call value : " +_callValue + ")");
 		}
 		
 		public function Call(_callValue:Number) : void
 		{
 			Bet(_callValue - betValue);
 			lastAction = PokerAction.CALL;
-			TraceAction("Call");
+			TraceAction("Call (Suivre)");
 		}
 		
 		public function Check() : void
@@ -152,7 +152,7 @@
 		public function Fold() : void
 		{
 			lastAction = PokerAction.FOLD;
-			TraceAction("Fold");
+			TraceAction("Fold (Se coucher)");
 		}
 		
 		public function GetBetValue() : Number

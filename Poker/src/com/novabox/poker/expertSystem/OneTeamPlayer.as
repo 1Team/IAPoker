@@ -163,11 +163,10 @@ package com.novabox.poker.expertSystem
 			expertSystem.InferForward();
 			
 			var inferedFacts:Array = expertSystem.GetInferedFacts();
-			trace("Infered Facts:");
 			
 			for each(var inferedFact:Fact in inferedFacts)
 			{
-				trace(inferedFact.GetLabel());
+				trace("        Infered Facts:" + inferedFact.GetLabel());
 			}
 			
 			return inferedFacts.pop() as Fact;
@@ -280,10 +279,11 @@ package com.novabox.poker.expertSystem
 		
 		public function Perception():void
 		{
+			trace("\n---------------Tour de " + GetName() +"----------------------");
 			expertSystem.ResetFacts();
 			var numberCard:int = GetNumberCardsBoard();
 			if (numberCard == 0) {
-				trace("Valeur main preflop : " + GetValuePreflop());
+				trace("       Valeur de la main en preflop : " + GetValuePreflop());
 				var valeurPreflop:int = GetValuePreflop();
 				if (valeurPreflop == 0)
 					expertSystem.SetFactValue(FactJeuFaible, true);
@@ -297,17 +297,17 @@ package com.novabox.poker.expertSystem
 				expertSystem.SetFactValue(FactPreFlop, true);
 			}
 			else {
-				trace("Probabilité de gagné : " + probabiliteGain());
 				var probabilite:Number = probabiliteGain();
-				if (probabilite < 0.15)
+				trace("      Probabilité de gagné : " + probabilite);
+				if (probabilite < 0.150)
 					expertSystem.SetFactValue(FactJeuNul, true);
-				else if (probabilite < 0.2)
+				else if (probabilite < 0.250)
 					expertSystem.SetFactValue(FactJeuFaible, true);
-				else if (probabilite < 0.3)
+				else if (probabilite < 0.500)
 					expertSystem.SetFactValue(FactJeuMoyen, true);
-				else if (probabilite < 0.5)
+				else if (probabilite < 0.800)
 					expertSystem.SetFactValue(FactJeuBon, true);
-				else if (probabilite <= 1)
+				else if (probabilite <= 100)
 					expertSystem.SetFactValue(FactJeuTresBon, true);
 				
 				if (numberCard == 3)
@@ -364,16 +364,18 @@ package com.novabox.poker.expertSystem
 		
 		public function ValeurRelance():int
 		{
+			trace("Valeur de la BigBlind : " + pokerTable.GetBigBlind());
 			if (expertSystem.GetFactBase().GetFactValue(FactJeuNul))
 				return pokerTable.GetBigBlind();
 			if (expertSystem.GetFactBase().GetFactValue(FactJeuFaible))
-				return (pokerTable.GetBigBlind() *2 );
+				return (Math.round(pokerTable.GetBigBlind() * 0.20));
 			if (expertSystem.GetFactBase().GetFactValue(FactJeuMoyen))
-				return (pokerTable.GetBigBlind() *3 );
+				return (pokerTable.GetBigBlind() * 1);
 			if (expertSystem.GetFactBase().GetFactValue(FactJeuBon))
-				return (pokerTable.GetBigBlind() *4 );
+				return (pokerTable.GetBigBlind() * 2);
 			if (expertSystem.GetFactBase().GetFactValue(FactJeuTresBon))
-				return (pokerTable.GetBigBlind() * 6 );
+				return (pokerTable.GetBigBlind() * 3);
+			
 			return (pokerTable.GetBigBlind() * 2 );
 		}
 		
