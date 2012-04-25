@@ -420,7 +420,7 @@ package com.novabox.poker.expertSystem
 				if (expertSystem.GetFactBase().GetFactValue(FactJeuBon))
 					return (pokerTable.GetBigBlind() *2);
 				if (expertSystem.GetFactBase().GetFactValue(FactJeuTresBon))
-					return (pokerTable.GetBigBlind() *4);
+					return (pokerTable.GetBigBlind() *3);
 				return pokerTable.GetBigBlind();
 			}
 			if (numberCard == 5)
