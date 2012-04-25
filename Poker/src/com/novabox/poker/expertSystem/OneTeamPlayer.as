@@ -56,12 +56,20 @@ package com.novabox.poker.expertSystem
 										[0, 0, 0, 0, 0, 0, 2, 2, 3, 3, 3, 3, 3],
 										[1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3],
 										[1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3]];
+										
+		private var aggressiviteJoueur:Array;
 		
 		public function OneTeamPlayer(_name:String, _stackValue:Number) 
 		{
 			super(_name, _stackValue);
 			
 			expertSystem = new ExpertSystem();
+			
+			aggressiviteJoueur = new Array(PokerTable.PLAYERS_COUNT - 1);
+			
+			for (var i:int = 0; i < PokerTable.PLAYERS_COUNT - 1; i++) {
+				aggressiviteJoueur[i] = 0;
+			}
 			
 			prepareRules();
 		}
@@ -361,6 +369,12 @@ package com.novabox.poker.expertSystem
 				Fold();
 			}
 		}
+		
+		
+		public function analyseAdversaires():void {
+			
+		}
+		
 		
 		public function ValeurRelance():int
 		{
