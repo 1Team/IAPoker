@@ -1,4 +1,4 @@
-﻿package
+﻿package 
 {
 	import com.novabox.playingCards.Deck;
 	import com.novabox.playingCards.Height;
@@ -6,7 +6,7 @@
 	import com.novabox.playingCards.Suit;
 	import com.novabox.poker.evaluator.HandEvaluator;
 	import com.novabox.poker.HumanPlayer;
-	import com.novabox.poker.expertSystem.OneTeamPlayer;
+	import OneTeamPlayer.OneTeamPlayer;
 	import com.novabox.poker.PokerPlayer;
 	import com.novabox.poker.PokerTable;
 	import com.novabox.poker.states.Preflop;

@@ -1,4 +1,4 @@
-﻿package com.novabox.poker.expertSystem 
+﻿package OneTeamPlayer 
 {
 	import adobe.utils.ProductManager;
 	import flash.display.GradientType;

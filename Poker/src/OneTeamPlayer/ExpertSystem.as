@@ -1,4 +1,4 @@
-﻿package com.novabox.poker.expertSystem 
+﻿package OneTeamPlayer 
 {
 	/**
 	 * Expert System 
